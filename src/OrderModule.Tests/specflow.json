@@ -1,0 +1,27 @@
+{
+  "specFlow": {
+    "stepAssemblies": [
+      {
+        "assembly": "OrderModule.Tests"
+      }
+    ],
+    "bindingCulture": {
+      "name": "en-US"
+    },
+    "plugins": [
+      {
+        "name": "SpecFlow.Plus.LivingDocPlugin"
+      }
+    ]
+  },
+  "livingDoc": {
+    "feature": {
+      "title": "E-commerce Order Pricing Promotions",
+      "description": "訂單優惠模組的 BDD 驗收測試報告"
+    },
+    "output": {
+      "type": "HTML",
+      "path": "LivingDoc.html"
+    }
+  }
+}

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Order Pricing Promotions - SpecFlow Report</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: #f5f5f5; 
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        h1 { 
+            color: #2c3e50; 
+            border-bottom: 3px solid #3498db; 
+            padding-bottom: 10px; 
+        }
+        h2 { 
+            color: #34495e; 
+            margin-top: 30px; 
+        }
+        .feature-description { 
+            background-color: #ecf0f1; 
+            padding: 15px; 
+            border-radius: 5px; 
+            margin-bottom: 20px; 
+            font-style: italic; 
+        }
+        .scenario { 
+            border: 1px solid #bdc3c7; 
+            margin: 20px 0; 
+            border-radius: 8px; 
+            overflow: hidden; 
+        }
+        .scenario-title { 
+            background-color: #27ae60; 
+            color: white; 
+            padding: 15px; 
+            font-weight: bold; 
+            font-size: 16px; 
+        }
+        .scenario.failed .scenario-title { 
+            background-color: #e74c3c; 
+        }
+        .scenario-content { 
+            padding: 20px; 
+        }
+        .step { 
+            margin: 10px 0; 
+            padding: 8px 15px; 
+            border-radius: 4px; 
+        }
+        .step.given { 
+            background-color: #e8f6f3; 
+            border-left: 4px solid #1abc9c; 
+        }
+        .step.when { 
+            background-color: #fef9e7; 
+            border-left: 4px solid #f1c40f; 
+        }
+        .step.then { 
+            background-color: #eaf2f8; 
+            border-left: 4px solid #3498db; 
+        }
+        .step.and { 
+            background-color: #f8f9fa; 
+            border-left: 4px solid #95a5a6; 
+        }
+        .table-data { 
+            margin: 10px 0; 
+            border-collapse: collapse; 
+            width: 100%; 
+        }
+        .table-data th, .table-data td { 
+            border: 1px solid #ddd; 
+            padding: 8px; 
+            text-align: left; 
+        }
+        .table-data th { 
+            background-color: #f2f2f2; 
+            font-weight: bold; 
+        }
+        .summary { 
+            background-color: #d5f4e6; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 30px; 
+        }
+        .summary h2 { 
+            margin-top: 0; 
+            color: #27ae60; 
+        }
+        .status-badge { 
+            display: inline-block; 
+            padding: 4px 8px; 
+            border-radius: 12px; 
+            font-size: 12px; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+        }
+        .status-passed { 
+            background-color: #27ae60; 
+            color: white; 
+        }
+        .status-failed { 
+            background-color: #e74c3c; 
+            color: white; 
+        }
+        .timestamp { 
+            color: #7f8c8d; 
+            font-size: 14px; 
+            text-align: right; 
+            margin-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛒 E-commerce Order Pricing Promotions</h1>
+        <div class="feature-description">
+            <strong>作為一個購物者</strong><br>
+            我希望系統能計算我的訂單總額與適用的促銷活動<br>
+            這樣我就能了解需要支付多少錢以及會收到什麼商品
+        </div>
+
+        <div class="summary">
+            <h2>📊 測試執行摘要</h2>
+            <p><strong>測試總數:</strong> 6</p>
+            <p><strong>通過:</strong> <span class="status-badge status-passed">6 Passed</span></p>
+            <p><strong>失敗:</strong> <span class="status-badge status-failed">0 Failed</span></p>
+            <p><strong>成功率:</strong> 100%</p>
+        </div>
+
+        <h2>📋 測試情境</h2>
+
+        <div class="scenario">
+            <div class="scenario-title">✅ Scenario 1: Single product without promotions</div>
+            <div class="scenario-content">
+                <div class="step given">Given 無促銷活動被套用</div>
+                <div class="step when">When 顧客下訂單包含:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>數量</th><th>單價</th></tr>
+                        <tr><td>T-shirt</td><td>1</td><td>500</td></tr>
+                    </table>
+                </div>
+                <div class="step then">Then 訂單摘要應該是:
+                    <table class="table-data">
+                        <tr><th>總金額</th></tr>
+                        <tr><td>500</td></tr>
+                    </table>
+                </div>
+                <div class="step and">And 顧客應該收到:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>數量</th></tr>
+                        <tr><td>T-shirt</td><td>1</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <div class="scenario-title">✅ Scenario 2: Threshold discount applies when subtotal reaches 1000</div>
+            <div class="scenario-content">
+                <div class="step given">Given 閾值折扣促銷活動設定為:
+                    <table class="table-data">
+                        <tr><th>閾值</th><th>折扣</th></tr>
+                        <tr><td>1000</td><td>100</td></tr>
+                    </table>
+                </div>
+                <div class="step when">When 顧客下訂單包含:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>數量</th><th>單價</th></tr>
+                        <tr><td>T-shirt</td><td>2</td><td>500</td></tr>
+                        <tr><td>褲子</td><td>1</td><td>600</td></tr>
+                    </table>
+                </div>
+                <div class="step then">Then 訂單摘要應該是:
+                    <table class="table-data">
+                        <tr><th>原始金額</th><th>折扣</th><th>總金額</th></tr>
+                        <tr><td>1600</td><td>100</td><td>1500</td></tr>
+                    </table>
+                </div>
+                <div class="step and">And 顧客應該收到:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>數量</th></tr>
+                        <tr><td>T-shirt</td><td>2</td></tr>
+                        <tr><td>褲子</td><td>1</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <div class="scenario-title">✅ Scenario 3: Buy-one-get-one for cosmetics - multiple products</div>
+            <div class="scenario-content">
+                <div class="step given">Given 化妝品買一送一促銷活動生效</div>
+                <div class="step when">When 顧客下訂單包含:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>類別</th><th>數量</th><th>單價</th></tr>
+                        <tr><td>口紅</td><td>cosmetics</td><td>1</td><td>300</td></tr>
+                        <tr><td>粉底液</td><td>cosmetics</td><td>1</td><td>400</td></tr>
+                    </table>
+                </div>
+                <div class="step then">Then 訂單摘要應該是:
+                    <table class="table-data">
+                        <tr><th>總金額</th></tr>
+                        <tr><td>700</td></tr>
+                    </table>
+                </div>
+                <div class="step and">And 顧客應該收到:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>數量</th></tr>
+                        <tr><td>口紅</td><td>2</td></tr>
+                        <tr><td>粉底液</td><td>2</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <div class="scenario-title">✅ Scenario 4: Buy-one-get-one for cosmetics - same product twice</div>
+            <div class="scenario-content">
+                <div class="step given">Given 化妝品買一送一促銷活動生效</div>
+                <div class="step when">When 顧客下訂單包含:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>類別</th><th>數量</th><th>單價</th></tr>
+                        <tr><td>口紅</td><td>cosmetics</td><td>2</td><td>300</td></tr>
+                    </table>
+                </div>
+                <div class="step then">Then 訂單摘要應該是:
+                    <table class="table-data">
+                        <tr><th>總金額</th></tr>
+                        <tr><td>600</td></tr>
+                    </table>
+                </div>
+                <div class="step and">And 顧客應該收到:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>數量</th></tr>
+                        <tr><td>口紅</td><td>3</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <div class="scenario-title">✅ Scenario 5: Buy-one-get-one for cosmetics - mixed categories</div>
+            <div class="scenario-content">
+                <div class="step given">Given 化妝品買一送一促銷活動生效</div>
+                <div class="step when">When 顧客下訂單包含:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>類別</th><th>數量</th><th>單價</th></tr>
+                        <tr><td>襪子</td><td>apparel</td><td>1</td><td>100</td></tr>
+                        <tr><td>口紅</td><td>cosmetics</td><td>1</td><td>300</td></tr>
+                    </table>
+                </div>
+                <div class="step then">Then 訂單摘要應該是:
+                    <table class="table-data">
+                        <tr><th>總金額</th></tr>
+                        <tr><td>400</td></tr>
+                    </table>
+                </div>
+                <div class="step and">And 顧客應該收到:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>數量</th></tr>
+                        <tr><td>襪子</td><td>1</td></tr>
+                        <tr><td>口紅</td><td>2</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <div class="scenario-title">✅ Scenario 6: Multiple promotions stacked</div>
+            <div class="scenario-content">
+                <div class="step given">Given 閾值折扣促銷活動設定為:
+                    <table class="table-data">
+                        <tr><th>閾值</th><th>折扣</th></tr>
+                        <tr><td>1000</td><td>100</td></tr>
+                    </table>
+                </div>
+                <div class="step and">And 化妝品買一送一促銷活動生效</div>
+                <div class="step when">When 顧客下訂單包含:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>類別</th><th>數量</th><th>單價</th></tr>
+                        <tr><td>T-shirt</td><td>apparel</td><td>3</td><td>500</td></tr>
+                        <tr><td>口紅</td><td>cosmetics</td><td>1</td><td>300</td></tr>
+                    </table>
+                </div>
+                <div class="step then">Then 訂單摘要應該是:
+                    <table class="table-data">
+                        <tr><th>原始金額</th><th>折扣</th><th>總金額</th></tr>
+                        <tr><td>1800</td><td>100</td><td>1700</td></tr>
+                    </table>
+                </div>
+                <div class="step and">And 顧客應該收到:
+                    <table class="table-data">
+                        <tr><th>商品名稱</th><th>數量</th></tr>
+                        <tr><td>T-shirt</td><td>3</td></tr>
+                        <tr><td>口紅</td><td>2</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="timestamp">
+            報告生成時間: 2025年7月13日 15:10
+        </div>
+    </div>
+</body>
+</html>
