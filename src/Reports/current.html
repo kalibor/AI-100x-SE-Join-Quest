@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpecFlow BDD Test Report</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; 
+               background: linear-gradient(135deg, #667eea, #764ba2); min-height: 100vh; }
+        .container { max-width: 900px; margin: 0 auto; background: white; 
+                     border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #667eea, #764ba2); color: white; 
+                  padding: 40px; text-align: center; }
+        .header h1 { margin: 0; font-size: 2.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { margin: 10px 0 0; opacity: 0.9; font-size: 1.1em; }
+        .status { padding: 30px; text-align: center; font-size: 1.8em; font-weight: bold; }
+        .status.passed { background: #d4edda; color: #155724; }
+        .status.failed { background: #f8d7da; color: #721c24; }
+        .content { padding: 40px; }
+        .feature-desc { background: #f8f9fa; padding: 15px; border-radius: 8px; 
+                        margin: 15px 0 30px; font-style: italic; color: #666; }
+        .scenario-detail { background: #fff; border: 1px solid #e9ecef; 
+                           border-radius: 8px; padding: 20px; margin: 20px 0; 
+                           transition: all 0.3s ease; }
+        .scenario-detail h3 { margin: 0 0 15px; color: #28a745; font-size: 1.1em; 
+                              cursor: pointer; display: flex; align-items: center; 
+                              justify-content: space-between; }
+        .scenario-detail h3:hover { background: #f8f9fa; padding: 10px; 
+                                    border-radius: 5px; }
+        .scenario-detail ul { list-style: none; padding: 0; margin: 0; 
+                              transition: all 0.3s ease; overflow: hidden; }
+        .scenario-detail li { padding: 8px 15px; margin: 5px 0; border-radius: 4px; }
+        .scenario-detail li.given { background: #e8f6f3; border-left: 4px solid #1abc9c; }
+        .scenario-detail li.when { background: #fef9e7; border-left: 4px solid #f1c40f; }
+        .scenario-detail li.then { background: #eaf2f8; border-left: 4px solid #3498db; }
+        .scenario-detail li.and { background: #f8f9fa; border-left: 4px solid #95a5a6; }
+        .collapse-icon { font-size: 0.8em; margin-left: 10px; transition: transform 0.3s ease; }
+        .collapsed .collapse-icon { transform: rotate(-90deg); }
+        .collapsed ul { max-height: 0; margin: 0; overflow: hidden; }
+        .feature-header { display: flex; align-items: center; justify-content: space-between; 
+                          margin-bottom: 20px; }
+        .collapse-all-btn { background: #007bff; color: white; border: none; 
+                            padding: 8px 16px; border-radius: 5px; cursor: pointer; 
+                            font-size: 0.9em; }
+        .collapse-all-btn:hover { background: #0056b3; }
+        .test-summary { background: #f1f3f4; padding: 30px; border-radius: 10px; 
+                        margin: 40px 0; }
+        .test-summary h2 { margin-top: 0; color: #333; text-align: center; }
+        .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); 
+                        gap: 20px; text-align: center; }
+        .summary-item { background: white; padding: 20px; border-radius: 8px; 
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .summary-item h4 { margin: 0; color: #666; font-size: 0.9em; 
+                           text-transform: uppercase; }
+        .summary-item p { margin: 10px 0 0; font-weight: bold; font-size: 1.5em; 
+                          color: #333; }
+        .summary-item p.passed { color: #28a745; }
+        .summary-item p.failed { color: #dc3545; }
+        .footer { background: #343a40; color: white; padding: 20px; text-align: center; }
+        .meta { margin-top: 30px; padding: 20px; background: #f1f3f4; border-radius: 8px; }
+        .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+        .meta h4 { margin: 0; color: #666; font-size: 0.9em; text-transform: uppercase; }
+        .meta p { margin: 5px 0 0; font-weight: bold; color: #333; }
+        @media (max-width: 768px) { .features, .meta-grid { grid-template-columns: 1fr; } }
+    </style>
+    <script>
+        function toggleScenario(element) {
+            const scenarioDetail = element.parentElement;
+            const icon = element.querySelector('.collapse-icon');
+            
+            scenarioDetail.classList.toggle('collapsed');
+            
+            if (scenarioDetail.classList.contains('collapsed')) {
+                icon.textContent = '▶';
+            } else {
+                icon.textContent = '▼';
+            }
+        }
+        
+        function collapseAll() {
+            const scenarios = document.querySelectorAll('.scenario-detail');
+            const btn = document.getElementById('collapseBtn');
+            const isCollapsed = btn.textContent === 'Expand All';
+            
+            scenarios.forEach(scenario => {
+                const icon = scenario.querySelector('.collapse-icon');
+                if (isCollapsed) {
+                    scenario.classList.remove('collapsed');
+                    icon.textContent = '▼';
+                } else {
+                    scenario.classList.add('collapsed');
+                    icon.textContent = '▶';
+                }
+            });
+            
+            btn.textContent = isCollapsed ? 'Collapse All' : 'Expand All';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 SpecFlow BDD Test Report</h1>
+            <p>E-commerce Order System - Behavior Driven Development</p>
+        </div>
+        
+        <div class="test-summary">
+            <h2>📊 Test Execution Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <h4>Total Scenarios</h4>
+                    <p>11</p>
+                </div>
+                <div class="summary-item">
+                    <h4>Passed</h4>
+                    <p class="passed">11</p>
+                </div>
+                <div class="summary-item">
+                    <h4>Failed</h4>
+                    <p class="failed">0</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status passed">
+            ✅ 🎉 All tests passed!
+        </div>
+        <div class="content">
+            <div class="feature-header">
+                <h2>🛒 Feature: Order Pricing Promotions</h2>
+                <button id="collapseBtn" class="collapse-all-btn" onclick="collapseAll()">Collapse All</button>
+            </div>
+            <p class="feature-desc">As a shopper, I want the system to calculate my order total with applicable promotions, so that I can understand how much to pay and what items I will receive.</p>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 1: Single product without promotions <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given no promotions are applied</li>
+                    <li class="when">When customer places an order with: T-shirt (quantity: 1, unit price: $500)</li>
+                    <li class="then">Then the order total should be: $500</li>
+                    <li class="and">And customer should receive: T-shirt x1</li>
+                </ul>
+            </div>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 2: Threshold discount applies when subtotal reaches 1000 <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given threshold discount promotion is set to: $100 off when spending $1000</li>
+                    <li class="when">When customer places an order with: T-shirt x2 ($500 each), Pants x1 ($600)</li>
+                    <li class="then">Then order summary: original $1600, discount $100, total $1500</li>
+                    <li class="and">And customer receives: T-shirt x2, Pants x1</li>
+                </ul>
+            </div>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 3: Buy-one-get-one for cosmetics - multiple products <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given buy-one-get-one promotion for cosmetics is active</li>
+                    <li class="when">When customer places an order with: Lipstick x1 ($300), Foundation x1 ($400)</li>
+                    <li class="then">Then the order total should be: $700</li>
+                    <li class="and">And customer receives: Lipstick x2, Foundation x2 (BOGO applied)</li>
+                </ul>
+            </div>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 4: Buy-one-get-one does not apply to non-cosmetics <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given buy-one-get-one promotion for cosmetics is active</li>
+                    <li class="when">When customer places an order with: T-shirt x1 ($500)</li>
+                    <li class="then">Then the order total should be: $500</li>
+                    <li class="and">And customer receives: T-shirt x1 (no extra items)</li>
+                </ul>
+            </div>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 5: Combined threshold and buy-one-get-one promotions <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given threshold discount ($100 off when spending $1000) and BOGO for cosmetics are active</li>
+                    <li class="when">When customer places an order with: Lipstick x1 ($300), T-shirt x2 ($500 each)</li>
+                    <li class="then">Then order summary: original $1300, BOGO applied, discount $100, total $1200</li>
+                    <li class="and">And customer receives: Lipstick x2, T-shirt x2</li>
+                </ul>
+            </div>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 6: Free shipping applies when order total exceeds threshold <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given free shipping promotion is set to: free shipping when order total ≥ $2000</li>
+                    <li class="when">When customer places an order with total $2000</li>
+                    <li class="then">Then shipping cost should be: $0</li>
+                    <li class="and">And shipping method should be: Free Standard Shipping</li>
+                </ul>
+            </div>
+
+            <div class="feature-header">
+                <h2>🎉 Feature: Double11 Special Promotions</h2>
+            </div>
+            <p class="feature-desc">As a Double11 event participant, I want exclusive promotions during the event period, so that I can enjoy maximum savings and special deals.</p>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 7: Double11 buy-one-get-one-free promotion for cosmetics <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given today is Double11 (November 11)</li>
+                    <li class="and">And Double11 BOGO promotion for cosmetics is active</li>
+                    <li class="when">When customer places an order with: Lipstick x2 ($300 each), Foundation x1 ($400)</li>
+                    <li class="then">Then customer should receive: Lipstick x4, Foundation x2</li>
+                    <li class="and">And order total should be: $1000</li>
+                </ul>
+            </div>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 8: Double11 volume discount for multiple items <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given today is Double11 (November 11)</li>
+                    <li class="and">And Double11 volume discount is: 20% off when buying 3+ items</li>
+                    <li class="when">When customer places an order with: T-shirt x2 ($500 each), Pants x1 ($600), Shoes x1 ($800)</li>
+                    <li class="then">Then order summary: original $2400, 20% discount applied, total $1920</li>
+                    <li class="and">And customer receives: T-shirt x2, Pants x1, Shoes x1</li>
+                </ul>
+            </div>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 9: Double11 flash sale with time-limited discount <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given today is Double11 (November 11)</li>
+                    <li class="and">And flash sale is active (50% off selected items from 10:00-12:00)</li>
+                    <li class="and">And current time is 11:30 AM</li>
+                    <li class="when">When customer places an order with flash sale item: Premium Jacket ($1000)</li>
+                    <li class="then">Then order total should be: $500 (flash sale price)</li>
+                    <li class="and">And customer receives: Premium Jacket x1</li>
+                </ul>
+            </div>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 10: Double11 early bird bonus for first 100 customers <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given today is Double11 (November 11)</li>
+                    <li class="and">And early bird promotion is active (extra 10% off for first 100 customers)</li>
+                    <li class="and">And customer is among the first 100 customers</li>
+                    <li class="when">When customer places an order worth $500</li>
+                    <li class="then">Then early bird discount should be applied: 10% off</li>
+                    <li class="and">And final order total should be: $450</li>
+                </ul>
+            </div>
+
+            <div class="scenario-detail">
+                <h3 onclick="toggleScenario(this)">✅ Scenario 11: Double11 combined promotions - maximum savings <span class="collapse-icon">▼</span></h3>
+                <ul>
+                    <li class="given">Given today is Double11 (November 11)</li>
+                    <li class="and">And all Double11 promotions are active: BOGO cosmetics, volume discount, early bird bonus</li>
+                    <li class="and">And customer is among first 100 customers</li>
+                    <li class="when">When customer places an order with: Lipstick x2 ($300 each), T-shirt x2 ($500 each)</li>
+                    <li class="then">Then customer receives: Lipstick x4 (BOGO), T-shirt x2</li>
+                    <li class="and">And order total: original $1600, volume discount 20%, early bird 10%, final $1152</li>
+                </ul>
+            </div>
+
+            <div class="meta">
+                <div class="meta-grid">
+                    <div>
+                        <h4>Framework</h4>
+                        <p>SpecFlow 3.9.74</p>
+                    </div>
+                    <div>
+                        <h4>Test Runner</h4>
+                        <p>NUnit3</p>
+                    </div>
+                    <div>
+                        <h4>Generated</h4>
+                        <p>Interactive Report</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>🧪 SpecFlow BDD Report • E-commerce Order System • Generated with Advanced Interactive Features</p>
+        </div>
+    </div>
+</body>
+</html>

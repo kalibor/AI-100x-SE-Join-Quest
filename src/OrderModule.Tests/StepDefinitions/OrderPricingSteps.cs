@@ -8,17 +8,31 @@ namespace OrderModule.Tests.StepDefinitions
     [Binding]
     public class OrderPricingSteps
     {
-        private OrderService _orderService = new OrderService();
+        private readonly ScenarioContext _scenarioContext;
         private List<Product> _orderProducts = new List<Product>();
         private Order _processedOrder = new Order();
         private decimal _thresholdAmount;
         private decimal _discountAmount;
 
+        public OrderPricingSteps(ScenarioContext scenarioContext)
+        {
+            _scenarioContext = scenarioContext;
+        }
+
+        private OrderService GetOrderService()
+        {
+            if (!_scenarioContext.ContainsKey("OrderService"))
+            {
+                _scenarioContext["OrderService"] = new OrderService();
+            }
+            return (OrderService)_scenarioContext["OrderService"];
+        }
+
         [BeforeScenario]
         public void BeforeScenario()
         {
             // 每個 scenario 重新初始化
-            _orderService = new OrderService();
+            _scenarioContext["OrderService"] = new OrderService();
             _orderProducts = new List<Product>();
             _processedOrder = new Order();
         }
@@ -38,14 +52,16 @@ namespace OrderModule.Tests.StepDefinitions
             _discountAmount = decimal.Parse(row["discount"]);
             
             // 設定閾值折扣促銷活動
-            _orderService.SetThresholdDiscount(_thresholdAmount, _discountAmount);
+            var orderService = GetOrderService();
+            orderService.SetThresholdDiscount(_thresholdAmount, _discountAmount);
         }
 
         [Given(@"the buy one get one promotion for cosmetics is active")]
         public void GivenTheBuyOneGetOnePromotionForCosmeticsIsActive()
         {
             // 設定買一送一促銷活動
-            _orderService.SetBuyOneGetOnePromotion("cosmetics");
+            var orderService = GetOrderService();
+            orderService.SetBuyOneGetOnePromotion("cosmetics");
         }
 
         [When(@"a customer places an order with:")]
@@ -71,7 +87,8 @@ namespace OrderModule.Tests.StepDefinitions
             }
 
             // 處理訂單但不實作邏輯
-            _processedOrder = _orderService.ProcessOrder(_orderProducts);
+            var orderService = GetOrderService();
+            _processedOrder = orderService.ProcessOrder(_orderProducts);
         }
 
         [Then(@"the order summary should be:")]

@@ -97,32 +97,32 @@ namespace OrderModule.Tests.Features
 #line 8
     testRunner.Given("no promotions are applied", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "quantity",
                             "unitPrice"});
-                table1.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "T-shirt",
                             "1",
                             "500"});
 #line 9
-    testRunner.When("a customer places an order with:", ((string)(null)), table1, "When ");
+    testRunner.When("a customer places an order with:", ((string)(null)), table9, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "totalAmount"});
-                table2.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "500"});
 #line 12
-    testRunner.Then("the order summary should be:", ((string)(null)), table2, "Then ");
+    testRunner.Then("the order summary should be:", ((string)(null)), table10, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "quantity"});
-                table3.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "T-shirt",
                             "1"});
 #line 15
-    testRunner.And("the customer should receive:", ((string)(null)), table3, "And ");
+    testRunner.And("the customer should receive:", ((string)(null)), table11, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -145,52 +145,52 @@ namespace OrderModule.Tests.Features
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "threshold",
                             "discount"});
-                table4.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "1000",
                             "100"});
 #line 20
-    testRunner.Given("the threshold discount promotion is configured:", ((string)(null)), table4, "Given ");
+    testRunner.Given("the threshold discount promotion is configured:", ((string)(null)), table12, "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "quantity",
                             "unitPrice"});
-                table5.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "T-shirt",
                             "2",
                             "500"});
-                table5.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "褲子",
                             "1",
                             "600"});
 #line 23
-    testRunner.When("a customer places an order with:", ((string)(null)), table5, "When ");
+    testRunner.When("a customer places an order with:", ((string)(null)), table13, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "originalAmount",
                             "discount",
                             "totalAmount"});
-                table6.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "1600",
                             "100",
                             "1500"});
 #line 27
-    testRunner.Then("the order summary should be:", ((string)(null)), table6, "Then ");
+    testRunner.Then("the order summary should be:", ((string)(null)), table14, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "quantity"});
-                table7.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "T-shirt",
                             "2"});
-                table7.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "褲子",
                             "1"});
 #line 30
-    testRunner.And("the customer should receive:", ((string)(null)), table7, "And ");
+    testRunner.And("the customer should receive:", ((string)(null)), table15, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -216,42 +216,42 @@ namespace OrderModule.Tests.Features
 #line 36
     testRunner.Given("the buy one get one promotion for cosmetics is active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "category",
                             "quantity",
                             "unitPrice"});
-                table8.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "口紅",
                             "cosmetics",
                             "1",
                             "300"});
-                table8.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "粉底液",
                             "cosmetics",
                             "1",
                             "400"});
 #line 37
-    testRunner.When("a customer places an order with:", ((string)(null)), table8, "When ");
+    testRunner.When("a customer places an order with:", ((string)(null)), table16, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "totalAmount"});
-                table9.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "700"});
 #line 41
-    testRunner.Then("the order summary should be:", ((string)(null)), table9, "Then ");
+    testRunner.Then("the order summary should be:", ((string)(null)), table17, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "quantity"});
-                table10.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "口紅",
                             "2"});
-                table10.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "粉底液",
                             "2"});
 #line 44
-    testRunner.And("the customer should receive:", ((string)(null)), table10, "And ");
+    testRunner.And("the customer should receive:", ((string)(null)), table18, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -277,34 +277,34 @@ namespace OrderModule.Tests.Features
 #line 50
     testRunner.Given("the buy one get one promotion for cosmetics is active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "category",
                             "quantity",
                             "unitPrice"});
-                table11.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "口紅",
                             "cosmetics",
                             "2",
                             "300"});
 #line 51
-    testRunner.When("a customer places an order with:", ((string)(null)), table11, "When ");
+    testRunner.When("a customer places an order with:", ((string)(null)), table19, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                             "totalAmount"});
-                table12.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "600"});
 #line 54
-    testRunner.Then("the order summary should be:", ((string)(null)), table12, "Then ");
+    testRunner.Then("the order summary should be:", ((string)(null)), table20, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "quantity"});
-                table13.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             "口紅",
                             "3"});
 #line 57
-    testRunner.And("the customer should receive:", ((string)(null)), table13, "And ");
+    testRunner.And("the customer should receive:", ((string)(null)), table21, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -330,42 +330,42 @@ namespace OrderModule.Tests.Features
 #line 62
     testRunner.Given("the buy one get one promotion for cosmetics is active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "category",
                             "quantity",
                             "unitPrice"});
-                table14.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "襪子",
                             "apparel",
                             "1",
                             "100"});
-                table14.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "口紅",
                             "cosmetics",
                             "1",
                             "300"});
 #line 63
-    testRunner.When("a customer places an order with:", ((string)(null)), table14, "When ");
+    testRunner.When("a customer places an order with:", ((string)(null)), table22, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                             "totalAmount"});
-                table15.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "400"});
 #line 67
-    testRunner.Then("the order summary should be:", ((string)(null)), table15, "Then ");
+    testRunner.Then("the order summary should be:", ((string)(null)), table23, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "quantity"});
-                table16.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             "襪子",
                             "1"});
-                table16.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             "口紅",
                             "2"});
 #line 70
-    testRunner.And("the customer should receive:", ((string)(null)), table16, "And ");
+    testRunner.And("the customer should receive:", ((string)(null)), table24, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -388,58 +388,58 @@ namespace OrderModule.Tests.Features
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                             "threshold",
                             "discount"});
-                table17.AddRow(new string[] {
+                table25.AddRow(new string[] {
                             "1000",
                             "100"});
 #line 76
-    testRunner.Given("the threshold discount promotion is configured:", ((string)(null)), table17, "Given ");
+    testRunner.Given("the threshold discount promotion is configured:", ((string)(null)), table25, "Given ");
 #line hidden
 #line 79
     testRunner.And("the buy one get one promotion for cosmetics is active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "category",
                             "quantity",
                             "unitPrice"});
-                table18.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "T-shirt",
                             "apparel",
                             "3",
                             "500"});
-                table18.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "口紅",
                             "cosmetics",
                             "1",
                             "300"});
 #line 80
-    testRunner.When("a customer places an order with:", ((string)(null)), table18, "When ");
+    testRunner.When("a customer places an order with:", ((string)(null)), table26, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                             "originalAmount",
                             "discount",
                             "totalAmount"});
-                table19.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "1800",
                             "100",
                             "1700"});
 #line 84
-    testRunner.Then("the order summary should be:", ((string)(null)), table19, "Then ");
+    testRunner.Then("the order summary should be:", ((string)(null)), table27, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                             "productName",
                             "quantity"});
-                table20.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "T-shirt",
                             "3"});
-                table20.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "口紅",
                             "2"});
 #line 87
-    testRunner.And("the customer should receive:", ((string)(null)), table20, "And ");
+    testRunner.And("the customer should receive:", ((string)(null)), table28, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

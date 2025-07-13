@@ -38,6 +38,7 @@ namespace OrderModule
     {
         private ThresholdDiscount? _thresholdDiscount;
         private string? _buyOneGetOneCategory;
+        private bool _isDouble11Enabled;
 
         public void SetThresholdDiscount(decimal threshold, decimal discountAmount)
         {
@@ -53,6 +54,11 @@ namespace OrderModule
             _buyOneGetOneCategory = category;
         }
 
+        public void SetDouble11Promotion(bool enabled)
+        {
+            _isDouble11Enabled = enabled;
+        }
+
         public Order ProcessOrder(List<Product> products)
         {
             var order = new Order();
@@ -65,11 +71,27 @@ namespace OrderModule
                 originalAmount += product.UnitPrice * product.Quantity;
             }
             
-            // 計算閾值折扣
+            // 計算折扣
             decimal discount = 0;
+            
+            // 計算閾值折扣
             if (_thresholdDiscount != null && originalAmount >= _thresholdDiscount.Threshold)
             {
-                discount = _thresholdDiscount.DiscountAmount;
+                discount += _thresholdDiscount.DiscountAmount;
+            }
+            
+            // 計算Double11折扣 - 每10個相同商品享受20%折扣
+            if (_isDouble11Enabled)
+            {
+                foreach (var product in products)
+                {
+                    if (product.Quantity >= 10)
+                    {
+                        int eligibleSets = product.Quantity / 10;
+                        decimal productDiscount = eligibleSets * 10 * product.UnitPrice * 0.2m;
+                        discount += productDiscount;
+                    }
+                }
             }
             
             // 設定訂單摘要
